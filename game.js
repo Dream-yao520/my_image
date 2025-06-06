@@ -31,9 +31,9 @@ function preload() {
     });
 
     // 图片加载
-    this.load.image('sky', 'image/sky.png');
-    this.load.image('monkey', 'image/monkey.png');
-    this.load.image('cloud', 'image/cloud1.0.png');
+    this.load.image('sky', 'https://raw.githubusercontent.com/Dream-yao520/my_image/main/image/sky.png');
+    this.load.image('monkey', 'https://raw.githubusercontent.com/Dream-yao520/my_image/main/image/monkey.png');
+    this.load.image('cloud', 'https://raw.githubusercontent.com/Dream-yao520/my_image/main/image/cloud1.0.png');
 
     // 错误处理
     this.load.on('loaderror', (file) => {
