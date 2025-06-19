@@ -31,9 +31,9 @@ function preload() {
     });
 
     // 图片加载
-    this.load.image('sky', 'https://raw.githubusercontent.com/Dream-yao520/my_image/main/image/sky.png');
-    this.load.image('monkey', 'https://raw.githubusercontent.com/Dream-yao520/my_image/main/image/monkey.png');
-    this.load.image('cloud', 'https://raw.githubusercontent.com/Dream-yao520/my_image/main/image/cloud1.0.png');
+    this.load.image('sky', 'https://pic1.imgdb.cn/item/68537c1a58cb8da5c85a6f9e.png');
+    this.load.image('monkey', 'https://pic1.imgdb.cn/item/68537c1a58cb8da5c85a6f9b.png');
+    this.load.image('cloud', 'https://pic1.imgdb.cn/item/68537c1a58cb8da5c85a6f9a.png');
 
     // 错误处理
     this.load.on('loaderror', (file) => {
@@ -113,7 +113,7 @@ function create() {
 
     // 修改云朵生成逻辑，加快生成速度
     this.time.addEvent({
-        delay: 500,  // 从1000改为500毫秒
+        delay: 400,  // 从1000改为500毫秒
         callback: () => {
             if (cloudCount < MAX_CLOUDS) {
                 lastCloudX += direction * 100;
@@ -198,6 +198,19 @@ function update() {
     // 强制下坠速度（防止卡在空中）
     if (!monkey.body.blocked.down && monkey.body.velocity.y < 300) {
         monkey.setVelocityY(monkey.body.velocity.y + 5);
+    }
+    // 新增：猴子掉落检测与分数惩罚
+    // 修改分数惩罚逻辑，添加状态标记防止重复扣分
+    if (monkey.y > game.config.height - 40) {
+        if (!isFalling) {
+            score = Math.max(0, score - 50); // 分数减30，最低为0
+            scoreText.setText('分数: ' + score);
+            isFalling = true; // 标记为已掉落
+        }
+    }
+
+    else {
+        isFalling = false; // 当猴子回到屏幕内时重置标记
     }
 
     // 优化后的自动滚动逻辑
