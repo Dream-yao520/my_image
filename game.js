@@ -23,6 +23,7 @@ let cursors;
 let clouds;
 let score = 0;
 let scoreText;
+let aaa = 0;
 
 function preload() {
     // 添加加载进度监控
